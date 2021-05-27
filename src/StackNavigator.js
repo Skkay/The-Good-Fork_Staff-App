@@ -3,10 +3,10 @@ import { StyleSheet, Pressable } from "react-native";
 
 import { createStackNavigator } from "@react-navigation/stack";
 
-import WaiterHomeScreen from './screens/WaiterHomeScreen';
+import WaiterHomeScreen from './screens/waiter_screens/WaiterHomeScreen';
 import Icon from './components/svg/Icon';
-import BarmanHomeScreen from "./screens/BarmanHomeScreen";
-import ChefHomeScreen from "./screens/ChefHomeScreen";
+import BarmanHomeScreen from "./screens/barman_screens/BarmanHomeScreen";
+import ChefHomeScreen from "./screens/chef_screens/ChefHomeScreen";
 import DefaultScreen from "./screens/DefaultScreen";
 
 const Stack = createStackNavigator();
