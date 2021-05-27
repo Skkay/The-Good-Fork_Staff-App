@@ -5,17 +5,37 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import WaiterHomeScreen from './screens/WaiterHomeScreen';
 import Icon from './components/svg/Icon';
+import BarmanHomeScreen from "./screens/BarmanHomeScreen";
 
 const Stack = createStackNavigator();
 
 const WaiterMainStackNavigator = ({ navigation }) => {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="WaiterHome">
       <Stack.Screen 
-        name="Home" 
+        name="WaiterHome" 
         component={WaiterHomeScreen} 
         options={{ 
           title: "Serveur: Accueil",
+          headerLeft: () => (
+            <Pressable style={styles.drawerIcon} onPress={() => navigation.openDrawer()}>
+              <Icon name="Bars" height="28" width="28" />
+            </Pressable>
+          ) 
+        }} 
+      />
+    </Stack.Navigator>
+  );
+}
+
+const BarmanMainStackNavigator = ({ navigation }) => {
+  return (
+    <Stack.Navigator initialRouteName="BarmanHome">
+      <Stack.Screen 
+        name="BarmanHome" 
+        component={BarmanHomeScreen} 
+        options={{ 
+          title: "Barman: Accueil",
           headerLeft: () => (
             <Pressable style={styles.drawerIcon} onPress={() => navigation.openDrawer()}>
               <Icon name="Bars" height="28" width="28" />
@@ -34,4 +54,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export { WaiterMainStackNavigator };
+export { WaiterMainStackNavigator, BarmanMainStackNavigator };

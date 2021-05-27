@@ -9,7 +9,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { AuthContext } from "./src/components/AuthContext";
 import CustomDrawer from './src/components/CustomDrawer';
-import { WaiterMainStackNavigator } from './src/StackNavigator';
+import { WaiterMainStackNavigator, BarmanMainStackNavigator } from './src/StackNavigator';
 
 const App = () => {
   const Stack = createStackNavigator();
@@ -73,6 +73,7 @@ const App = () => {
             <CustomDrawer props={props} signOut={signOut} />
           )}>
             {roles.includes('ROLE_WAITER') && <Drawer.Screen name="Waiter" component={WaiterMainStackNavigator} options={{ title: "Serveur: Accueil"}} /> }
+            {roles.includes('ROLE_BARMAN') && <Drawer.Screen name="Barman" component={BarmanMainStackNavigator} options={{ title: "Barman: Accueil"}} /> }
           </Drawer.Navigator>
         ) : (
           <Stack.Navigator initialRouteName="Login">
