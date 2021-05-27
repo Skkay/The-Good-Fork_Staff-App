@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import WaiterHomeScreen from './screens/WaiterHomeScreen';
 import Icon from './components/svg/Icon';
 import BarmanHomeScreen from "./screens/BarmanHomeScreen";
+import ChefHomeScreen from "./screens/ChefHomeScreen";
 
 const Stack = createStackNavigator();
 
@@ -47,6 +48,25 @@ const BarmanMainStackNavigator = ({ navigation }) => {
   );
 }
 
+const ChefMainStackNavigator = ({ navigation }) => {
+  return (
+    <Stack.Navigator initialRouteName="ChefHome">
+      <Stack.Screen 
+        name="ChefHome" 
+        component={ChefHomeScreen} 
+        options={{ 
+          title: "Cuisinier: Accueil",
+          headerLeft: () => (
+            <Pressable style={styles.drawerIcon} onPress={() => navigation.openDrawer()}>
+              <Icon name="Bars" height="28" width="28" />
+            </Pressable>
+          ) 
+        }} 
+      />
+    </Stack.Navigator>
+  );
+}
+
 const styles = StyleSheet.create({
   drawerIcon: {
     marginLeft: 15,
@@ -54,4 +74,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export { WaiterMainStackNavigator, BarmanMainStackNavigator };
+export { WaiterMainStackNavigator, BarmanMainStackNavigator, ChefMainStackNavigator };
