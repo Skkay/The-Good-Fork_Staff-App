@@ -3,8 +3,9 @@ import { StyleSheet, Pressable } from "react-native";
 
 import { createStackNavigator } from "@react-navigation/stack";
 
-import WaiterHomeScreen from './screens/waiter_screens/WaiterHomeScreen';
 import Icon from './components/svg/Icon';
+import WaiterHomeScreen from './screens/waiter_screens/WaiterHomeScreen';
+import OrdersScreen from './screens/waiter_screens/OrdersScreen';
 import BarmanHomeScreen from "./screens/barman_screens/BarmanHomeScreen";
 import ChefHomeScreen from "./screens/chef_screens/ChefHomeScreen";
 import DefaultScreen from "./screens/DefaultScreen";
@@ -26,6 +27,7 @@ const WaiterMainStackNavigator = ({ navigation }) => {
           ) 
         }} 
       />
+      <Stack.Screen name="Orders" component={OrdersScreen} options={{ title: "Les commandes"}} />
     </Stack.Navigator>
   );
 }
