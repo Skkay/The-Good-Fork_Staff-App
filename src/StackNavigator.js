@@ -7,6 +7,7 @@ import WaiterHomeScreen from './screens/WaiterHomeScreen';
 import Icon from './components/svg/Icon';
 import BarmanHomeScreen from "./screens/BarmanHomeScreen";
 import ChefHomeScreen from "./screens/ChefHomeScreen";
+import DefaultScreen from "./screens/DefaultScreen";
 
 const Stack = createStackNavigator();
 
@@ -67,6 +68,25 @@ const ChefMainStackNavigator = ({ navigation }) => {
   );
 }
 
+const DefaultStackNavigator = ({ navigation }) => {
+  return (
+    <Stack.Navigator initialRouteName="default">
+      <Stack.Screen 
+        name="default" 
+        component={DefaultScreen} 
+        options={{ 
+          title: "default",
+          headerLeft: () => (
+            <Pressable style={styles.drawerIcon} onPress={() => navigation.openDrawer()}>
+              <Icon name="Bars" height="28" width="28" />
+            </Pressable>
+          ) 
+        }} 
+      />
+    </Stack.Navigator>
+  );
+}
+
 const styles = StyleSheet.create({
   drawerIcon: {
     marginLeft: 15,
@@ -74,4 +94,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export { WaiterMainStackNavigator, BarmanMainStackNavigator, ChefMainStackNavigator };
+export { WaiterMainStackNavigator, BarmanMainStackNavigator, ChefMainStackNavigator, DefaultStackNavigator };
