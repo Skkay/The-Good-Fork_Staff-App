@@ -8,6 +8,24 @@ import Icon from './components/svg/Icon';
 
 const Stack = createStackNavigator();
 
+const WaiterMainStackNavigator = ({ navigation }) => {
+  return (
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen 
+        name="Home" 
+        component={WaiterHomeScreen} 
+        options={{ 
+          title: "Accueil",
+          headerLeft: () => (
+            <Pressable style={styles.drawerIcon} onPress={() => navigation.openDrawer()}>
+              <Icon name="Bars" height="28" width="28" />
+            </Pressable>
+          ) 
+        }} 
+      />
+    </Stack.Navigator>
+  );
+}
 
 const styles = StyleSheet.create({
   drawerIcon: {
@@ -16,3 +34,4 @@ const styles = StyleSheet.create({
   }
 });
 
+export { WaiterMainStackNavigator };

@@ -8,6 +8,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { AuthContext } from "./src/components/AuthContext";
+import CustomDrawer from './src/components/CustomDrawer';
+import { WaiterMainStackNavigator } from './src/StackNavigator';
 
 const App = () => {
   const Stack = createStackNavigator();
@@ -62,7 +64,11 @@ const App = () => {
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         {isConnected ? (
-          <Text>Connected</Text>
+          <Drawer.Navigator initialRouteName="Home" drawerContent={props => (
+            <CustomDrawer props={props} signOut={signOut} />
+          )}>
+            <Drawer.Screen name="Home" component={WaiterMainStackNavigator} options={{ title: "Home"}} />
+          </Drawer.Navigator>
         ) : (
           <Stack.Navigator initialRouteName="Login">
             <Stack.Screen name="Login" options={{ title: "Connexion" }}>
