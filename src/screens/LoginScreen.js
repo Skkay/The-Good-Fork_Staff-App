@@ -28,7 +28,7 @@ const LoginScreen = ({ setConnected, setRoles, navigation }) => {
           AsyncStorage.setItem("userTokenExp", jwt_decode(res.data.token).exp.toString());
           AsyncStorage.setItem("userId", res.data.data.id.toString());
           AsyncStorage.setItem("userRoles", JSON.stringify(res.data.data.roles));
-          setRoles(JSON.stringify(res.data.data.roles));
+          setRoles(res.data.data.roles);
           setConnected(true);
         } catch (e) {
           console.log(e);

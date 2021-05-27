@@ -42,7 +42,7 @@ const App = () => {
       try {
         const userTokenExp = await AsyncStorage.getItem("userTokenExp");
         const userToken = await AsyncStorage.getItem("userToken");
-        const roles = await AsyncStorage.getItem("userRoles");
+        const roles = JSON.parse(await AsyncStorage.getItem("userRoles"));
         console.log("ROLES:", roles);
         if (userTokenExp > Math.floor(Date.now() / 1000)) {
           console.log("Token still valid for", userTokenExp - Math.floor(Date.now() / 1000), "seconds");
