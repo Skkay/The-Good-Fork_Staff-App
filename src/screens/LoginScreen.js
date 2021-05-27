@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 
-const LoginScreen = ({ setConnected, navigation }) => {
+const LoginScreen = ({ setConnected, setRoles, navigation }) => {
   const [email, onChangeEmail] = useState("");
   const [password, onChangePassword] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -28,6 +28,7 @@ const LoginScreen = ({ setConnected, navigation }) => {
           AsyncStorage.setItem("userTokenExp", jwt_decode(res.data.token).exp.toString());
           AsyncStorage.setItem("userId", res.data.data.id.toString());
           AsyncStorage.setItem("userRoles", JSON.stringify(res.data.data.roles));
+          setRoles(JSON.stringify(res.data.data.roles));
           setConnected(true);
         } catch (e) {
           console.log(e);

@@ -15,7 +15,7 @@ const WaiterMainStackNavigator = ({ navigation }) => {
         name="Home" 
         component={WaiterHomeScreen} 
         options={{ 
-          title: "Accueil",
+          title: "Serveur: Accueil",
           headerLeft: () => (
             <Pressable style={styles.drawerIcon} onPress={() => navigation.openDrawer()}>
               <Icon name="Bars" height="28" width="28" />

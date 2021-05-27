@@ -16,6 +16,7 @@ const App = () => {
   const Drawer = createDrawerNavigator();
 
   const [isConnected, setConnected] = useState(false);
+  const [roles, setRoles] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
   const signOut = () => {
@@ -24,6 +25,7 @@ const App = () => {
       AsyncStorage.removeItem("userTokenExp");
       AsyncStorage.removeItem("userId");
       AsyncStorage.removeItem("userRoles");
+      setRoles([]);
       setConnected(false);
     } catch (e) {
       console.log(e);
@@ -40,8 +42,11 @@ const App = () => {
       try {
         const userTokenExp = await AsyncStorage.getItem("userTokenExp");
         const userToken = await AsyncStorage.getItem("userToken");
+        const roles = await AsyncStorage.getItem("userRoles");
+        console.log("ROLES:", roles);
         if (userTokenExp > Math.floor(Date.now() / 1000)) {
           console.log("Token still valid for", userTokenExp - Math.floor(Date.now() / 1000), "seconds");
+          setRoles(roles);
           setConnected(true);
         }
         setLoading(false);
@@ -64,15 +69,15 @@ const App = () => {
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         {isConnected ? (
-          <Drawer.Navigator initialRouteName="Home" drawerContent={props => (
+          <Drawer.Navigator drawerContent={props => (
             <CustomDrawer props={props} signOut={signOut} />
           )}>
-            <Drawer.Screen name="Home" component={WaiterMainStackNavigator} options={{ title: "Home"}} />
+            {roles.includes('ROLE_WAITER') && <Drawer.Screen name="Waiter" component={WaiterMainStackNavigator} options={{ title: "Serveur: Accueil"}} /> }
           </Drawer.Navigator>
         ) : (
           <Stack.Navigator initialRouteName="Login">
             <Stack.Screen name="Login" options={{ title: "Connexion" }}>
-              {({ navigation }) => <LoginScreen navigation={navigation} setConnected={setConnected} />}
+              {({ navigation }) => <LoginScreen navigation={navigation} setConnected={setConnected} setRoles={setRoles} />}
             </Stack.Screen>
           </Stack.Navigator>
         )}
