@@ -9,6 +9,7 @@ import OrdersScreen from './screens/waiter_screens/OrdersScreen';
 import BarmanHomeScreen from "./screens/barman_screens/BarmanHomeScreen";
 import ChefHomeScreen from "./screens/chef_screens/ChefHomeScreen";
 import DefaultScreen from "./screens/DefaultScreen";
+import PlaceOrderScreen from "./screens/waiter_screens/PlaceOrderScreen";
 
 const Stack = createStackNavigator();
 
@@ -28,6 +29,7 @@ const WaiterMainStackNavigator = ({ navigation }) => {
         }} 
       />
       <Stack.Screen name="Orders" component={OrdersScreen} options={{ title: "Les commandes"}} />
+      <Stack.Screen name="PlaceOrder" component={PlaceOrderScreen} options={{ title: "Passer une commande"}} />
     </Stack.Navigator>
   );
 }

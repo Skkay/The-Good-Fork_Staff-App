@@ -8,6 +8,9 @@ const WaiterHomeScreen = ({ navigation }) => {
       <Pressable style={styles.button} onPress={() => navigation.navigate('Orders')}>
         <Text>Orders</Text>
       </Pressable>
+      <Pressable style={styles.button} onPress={() => navigation.navigate('PlaceOrder')}>
+        <Text>Place order</Text>
+      </Pressable>
     </SafeAreaView>
   );
 };
@@ -15,6 +18,7 @@ const WaiterHomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   button: {
     backgroundColor: "#53A7D7",
+    margin: 10
   },
 });
 
