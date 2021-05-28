@@ -22,11 +22,11 @@ const OrdersScreen = () => {
   const handleValidateOrder = (orderId) => {
     updateOrderStatus(token, orderId, 3)
       .then((res) => {
-        console.log("Status order successfully updated", res);
+        console.log("Order status successfully updated", res);
         setRefreshKey(oldKey => oldKey + 1)
       })
       .catch((err) => {
-        console.log("Error during order status updating", err);
+        console.log("Error during order status update", err);
         UnexpectedError(err.message);
       });
   }
