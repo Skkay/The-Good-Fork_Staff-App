@@ -17,10 +17,13 @@ const OrdersScreen = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
+  const [refreshKey, setRefreshKey] = useState(0);
+
   const handleValidateOrder = (orderId) => {
     updateOrderStatus(token, orderId, 3)
       .then((res) => {
         console.log("Status order successfully updated", res);
+        setRefreshKey(oldKey => oldKey + 1)
       })
       .catch((err) => {
         console.log("Error during order status updating", err);
@@ -47,7 +50,7 @@ const OrdersScreen = () => {
     fetchOrders(token, 2, false)
       .then((res) => setData(res))
       .finally(() => setLoading(false));
-  }, [token, isValidToken]);
+  }, [token, isValidToken, refreshKey]);
 
   if (isLoading) {
     return (<ActivityIndicator size="large" color="#000000" />);
