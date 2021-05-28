@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, FlatList, Pressable } from "react-native";
 
 import OrderContentItem from './OrderContentItem';
 
-const OrderItem = ({ order }) => {
+const OrderItem = ({ order, handleValidateOrder }) => {
   const date = new Date(order.date_order);
   return (
     <View style={styles.order}>
@@ -64,7 +64,7 @@ const OrderItem = ({ order }) => {
           <Pressable style={({ pressed }) => [styles.buttonGroupButton, styles.buttonCancel, pressed && styles.buttonPressed]} onPress={() => console.log("1")}>
             <Text style={styles.buttonText}>Supprimer</Text>
           </Pressable>
-          <Pressable style={({ pressed }) => [styles.buttonGroupButton, styles.buttonValidate, pressed && styles.buttonPressed]} onPress={() => console.log("2")}>
+          <Pressable style={({ pressed }) => [styles.buttonGroupButton, styles.buttonValidate, pressed && styles.buttonPressed]} onPress={() => handleValidateOrder(order.id)}>
             <Text style={styles.buttonText}>Valider</Text>
           </Pressable>
         </View>
