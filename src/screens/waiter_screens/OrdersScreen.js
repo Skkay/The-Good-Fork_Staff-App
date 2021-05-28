@@ -94,16 +94,23 @@ const OrdersScreen = () => {
         </Pressable>
       </View>
       {selectedTab === 0 && (
-        <FlatList
-          data={eatInOrders}
-          renderItem={({ item }) => <OrderItem order={item} handleValidateOrder={handleValidateOrder} handleCancelOrder={handleCancelOrder} />}
-          keyExtractor={item => item.id.toString()} />
+        (eatInOrders.length < 1 ? (<Text style={styles.textNoOrder}>Aucune commande</Text>) : 
+        (
+          <FlatList
+            data={eatInOrders}
+            renderItem={({ item }) => <OrderItem order={item} handleValidateOrder={handleValidateOrder} handleCancelOrder={handleCancelOrder} />}
+            keyExtractor={item => item.id.toString()} />
+        ))
+
       )}
       {selectedTab === 1 && (
-        <FlatList
-          data={takeOutOrders}
-          renderItem={({ item }) => <OrderItem order={item} handleValidateOrder={handleValidateOrder} handleCancelOrder={handleCancelOrder} />}
-          keyExtractor={item => item.id.toString()} />
+        (takeOutOrders.length < 1 ? (<Text style={styles.textNoOrder}>Aucune commande</Text>) : 
+        (
+          <FlatList
+            data={takeOutOrders}
+            renderItem={({ item }) => <OrderItem order={item} handleValidateOrder={handleValidateOrder} handleCancelOrder={handleCancelOrder} />}
+            keyExtractor={item => item.id.toString()} />
+        ))
       )}
 
     </SafeAreaView>
@@ -137,6 +144,11 @@ const styles = StyleSheet.create({
   },
   buttonTextSelected: {
     color: "#FFFFFF",
+  },
+  textNoOrder: {
+    textAlign: "center",
+    color: "#6B6B6B",
+    fontStyle: "italic",
   }
 });
 
