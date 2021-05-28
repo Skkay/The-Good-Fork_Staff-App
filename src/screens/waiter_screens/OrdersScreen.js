@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SafeAreaView, Text, ActivityIndicator, FlatList, Alert } from "react-native";
+import { SafeAreaView, Text, ActivityIndicator, FlatList, Alert, StyleSheet, View, Pressable } from "react-native";
 
 import { AuthContext } from '../../components/AuthContext';
 import ExpiredSession from '../../components/alert/ExpiredSession';
@@ -16,7 +16,7 @@ const OrdersScreen = () => {
   const [isValidToken, setValidToken] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-
+  const [selectedTab, setSelectedTab] = useState(0);
   const [refreshKey, setRefreshKey] = useState(0);
 
   const handleValidateOrder = (orderId) => {
@@ -79,7 +79,14 @@ const OrdersScreen = () => {
 
   return (
     <SafeAreaView>
-      <Text>Orders home screen</Text>
+      <View style={styles.buttonGroup}>
+        <Pressable style={[styles.buttonGroupButton, styles.button, selectedTab === 0 && styles.buttonSelected]} onPress={() => setSelectedTab(0)}>
+          <Text style={[styles.buttonText, selectedTab === 0 && styles.buttonTextSelected]}>Sur place</Text>
+        </Pressable>
+        <Pressable style={[styles.buttonGroupButton, styles.button, selectedTab === 1 && styles.buttonSelected]} onPress={() => setSelectedTab(1)}>
+          <Text style={[styles.buttonText, selectedTab === 1 && styles.buttonTextSelected]}>À emporter</Text>
+        </Pressable>
+      </View>
       <FlatList
         data={data}
         renderItem={({ item }) => <OrderItem order={item} handleValidateOrder={handleValidateOrder} handleCancelOrder={handleCancelOrder} />}
@@ -88,5 +95,36 @@ const OrdersScreen = () => {
     </SafeAreaView>
   );
 };
+
+
+const styles = StyleSheet.create({
+  buttonGroup: {
+    flexDirection: "row",
+    backgroundColor: "#E0E0E0",
+    margin: 10,
+  },
+  buttonGroupButton: {
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: 0,
+    padding: 10,
+    margin: 10,
+  },
+  button: {
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    borderColor: "#000000",
+  },
+  buttonSelected: {
+    backgroundColor: "#000000",
+  },
+  buttonText: {
+    color: "#000000",
+    textAlign: "center",
+  },
+  buttonTextSelected: {
+    color: "#FFFFFF",
+  }
+});
 
 export default OrdersScreen;
