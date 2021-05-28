@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SafeAreaView, Text, ActivityIndicator, FlatList } from "react-native";
+import { SafeAreaView, Text, ActivityIndicator, FlatList, Alert } from "react-native";
 
 import { AuthContext } from '../../components/AuthContext';
 import ExpiredSession from '../../components/alert/ExpiredSession';
@@ -29,6 +29,27 @@ const OrdersScreen = () => {
         console.log("Error during order status update", err);
         UnexpectedError(err.message);
       });
+  }
+
+  const handleCancelOrder = (orderId) => {
+    Alert.alert(
+      "Confirmer l'annulation ?",
+      `Vous êtes sur le point d'annuler une commande, confirmer ?`,
+      [
+        { text: "Annuler", onPress: () => console.log("Order not canceled") }, 
+        { text: "Oui", onPress: () => {
+          updateOrderStatus(token, orderId, 1)
+            .then((res) => {
+              console.log("Order status successfully updated", res);
+              setRefreshKey(oldKey => oldKey + 1)
+            })
+            .catch((err) => {
+              console.log("Error during order status update", err);
+              UnexpectedError(err.message);
+            });
+        } }
+      ]
+    );
   }
 
   useEffect(() => {
@@ -61,7 +82,7 @@ const OrdersScreen = () => {
       <Text>Orders home screen</Text>
       <FlatList
         data={data}
-        renderItem={({ item }) => <OrderItem order={item} handleValidateOrder={handleValidateOrder} />}
+        renderItem={({ item }) => <OrderItem order={item} handleValidateOrder={handleValidateOrder} handleCancelOrder={handleCancelOrder} />}
         keyExtractor={item => item.id.toString()}
       />
     </SafeAreaView>
