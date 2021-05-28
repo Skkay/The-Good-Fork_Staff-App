@@ -14,8 +14,10 @@ const OrdersScreen = () => {
   const { signOut } = useContext(AuthContext);
   const [token, setToken] = useState(null);
   const [isValidToken, setValidToken] = useState(false);
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [isLoadingEatInOrders, setLoadingEatInOrders] = useState(true);
+  const [isLoadingTakeOutOrders, setLoadingTakeOutOrders] = useState(true);
+  const [eatInOrders, setEatInOrders] = useState([]);
+  const [takeOutOrders, setTakeOutOrders] = useState([]);
   const [selectedTab, setSelectedTab] = useState(0);
   const [refreshKey, setRefreshKey] = useState(0);
 
@@ -69,11 +71,15 @@ const OrdersScreen = () => {
     if (!isValidToken) return;
 
     fetchOrders(token, 2, false)
-      .then((res) => setData(res))
-      .finally(() => setLoading(false));
+      .then((res) => setTakeOutOrders(res))
+      .finally(() => setLoadingTakeOutOrders(false));
+
+    fetchOrders(token, 2, true)
+      .then((res) => setEatInOrders(res))
+      .finally(() => setLoadingEatInOrders(false));
   }, [token, isValidToken, refreshKey]);
 
-  if (isLoading) {
+  if (isLoadingEatInOrders && isLoadingTakeOutOrders) {
     return (<ActivityIndicator size="large" color="#000000" />);
   }
 
@@ -87,15 +93,22 @@ const OrdersScreen = () => {
           <Text style={[styles.buttonText, selectedTab === 1 && styles.buttonTextSelected]}>À emporter</Text>
         </Pressable>
       </View>
-      <FlatList
-        data={data}
-        renderItem={({ item }) => <OrderItem order={item} handleValidateOrder={handleValidateOrder} handleCancelOrder={handleCancelOrder} />}
-        keyExtractor={item => item.id.toString()}
-      />
+      {selectedTab === 0 && (
+        <FlatList
+          data={eatInOrders}
+          renderItem={({ item }) => <OrderItem order={item} handleValidateOrder={handleValidateOrder} handleCancelOrder={handleCancelOrder} />}
+          keyExtractor={item => item.id.toString()} />
+      )}
+      {selectedTab === 1 && (
+        <FlatList
+          data={takeOutOrders}
+          renderItem={({ item }) => <OrderItem order={item} handleValidateOrder={handleValidateOrder} handleCancelOrder={handleCancelOrder} />}
+          keyExtractor={item => item.id.toString()} />
+      )}
+
     </SafeAreaView>
   );
 };
-
 
 const styles = StyleSheet.create({
   buttonGroup: {
