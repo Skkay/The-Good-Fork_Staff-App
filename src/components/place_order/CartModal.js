@@ -23,7 +23,7 @@ const CartModal = ({ navigation, modalVisible, onRequestClose, onCloseButtonPres
   const handleBuyButtonClick = () => {
     onCloseButtonPress();
     console.log("handleBuyButtonClick");
-    // navigation.navigate('OrderType', {cartData: cartData, extraInfo: extraInfo, discountId: selectedDiscountIndex === undefined || selectedDiscountIndex === 0 ? 0 : discountList[selectedDiscountIndex - 1].id});
+    navigation.navigate('OrderType', {cartData: cartData, extraInfo: extraInfo});
   }
 
   useEffect(() => {
