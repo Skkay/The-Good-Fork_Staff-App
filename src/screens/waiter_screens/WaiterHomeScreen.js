@@ -31,6 +31,9 @@ const WaiterHomeScreen = ({ route, navigation }) => {
       <Pressable style={styles.button} onPress={() => navigation.navigate('PlaceOrder')}>
         <Text>Place order</Text>
       </Pressable>
+      <Pressable style={styles.button} onPress={() => navigation.navigate('Reservation')}>
+        <Text>Reservation</Text>
+      </Pressable>
     </SafeAreaView>
   );
 };
