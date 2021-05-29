@@ -1,38 +1,68 @@
-import React from "react";
-import { Text, View, StyleSheet, Pressable, Alert } from "react-native";
+import React, { useState } from "react";
+import { Text, View, StyleSheet, Pressable, Alert, Modal, TextInput } from "react-native";
 
 import UnexpectedError from '../alert/UnexpectedError';
 import postReservation from '../fetch/PostReservation';
 
 const TableItem = ({ table, token, navigation }) => {
   const date = new Date(table.date);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [customerName, setCustomerName] = useState("");
 
   const handlePressReservationButton = () => {
     console.log(table.date, table.service.id, table.table.id);
-    Alert.alert(
-      "Confirmer la reservation ?",
-      `Vous êtes sur le point de reserver une table de ${table.table.place} ${table.table.place > 1 ? "places" : "place" }, pour le service de ${table.service.startTime}h-${table.service.endTime}h le ${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}, confirmer ?`,
-      [
-        { text: "Annuler", onPress: () => console.log("Reservation canceled") }, 
-        { text: "Oui", onPress: handleReserveTable }
-      ]
-    );
+    if (customerName.trim()) {
+      Alert.alert(
+        "Confirmer la reservation ?",
+        `Vous êtes sur le point de reserver une table de ${table.table.place} ${table.table.place > 1 ? "places" : "place" }, pour le service de ${table.service.startTime}h-${table.service.endTime}h le ${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()} au nom de ${customerName.trim()}, confirmer ?`,
+        [
+          { text: "Annuler", onPress: () => console.log("Reservation canceled") }, 
+          { text: "Oui", onPress: handleReserveTable }
+        ]
+      );
+    }
   }
 
   const handleReserveTable = () => {
-    postReservation(token, table.service.id, table.table.id, date, "staff")
-      .then((res) => {
-        console.log("Reservation successfully placed", res);
-        navigation.navigate('WaiterHome', {toastType: "reservation_success", toastExtra: res.data});
-      })
-      .catch((err) => {
-        console.log("Error during reservation process", err);
-        UnexpectedError(err.message);
-      });
+    postReservation(token, table.service.id, table.table.id, date, customerName.trim())
+    .then((res) => {
+      console.log("Reservation successfully placed", res);
+      navigation.navigate('WaiterHome', {toastType: "reservation_success", toastExtra: res.data});
+    })
+    .catch((err) => {
+      console.log("Error during reservation process", err);
+      UnexpectedError(err.message);
+    });
   }
 
   return (
     <View style={styles.reservation}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}>
+        <View style={styles.modalView}>
+          <View style={styles.modalContent}>
+            <Text>Réserver à quel nom ?</Text>
+            <TextInput 
+              style={styles.textInput}
+              onChangeText={setCustomerName}
+              value={customerName}
+              placeholder="Nom"
+              maxLength={255}
+            />
+            <View style={styles.modalButtonGroup}>
+              <Pressable style={({ pressed }) => [styles.modalButtonGroupButton, styles.modalButton, styles.modalButtonCancel, pressed && styles.modalButtonPressed]} onPress={() => setModalVisible(false)}>
+                <Text style={styles.modalButtonText}>Annuler</Text>
+              </Pressable>
+              <Pressable style={({ pressed }) => [styles.modalButtonGroupButton, styles.modalButton, styles.modalButtonValidate, pressed && styles.modalButtonPressed]} onPress={handlePressReservationButton}>
+                <Text style={[styles.modalButtonText, styles.modalButtonTextValidate]}>Valider</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
       <View style={styles.reservationHeader}>
         <Text style={styles.reservationDate}>{date.getDate().toString().padStart(2, '0')}/{(date.getMonth() + 1).toString().padStart(2, '0')}/{date.getFullYear()} - {table.service.startTime}h-{table.service.endTime}h</Text>
       </View>
@@ -43,7 +73,7 @@ const TableItem = ({ table, token, navigation }) => {
         </View>
         <Pressable
           style={styles.button}
-          onPress={handlePressReservationButton}>
+          onPress={() => setModalVisible(true)}>
           <Text style={styles.textButton}>Réserver</Text>
         </Pressable>
       </View>
@@ -97,6 +127,58 @@ const styles = StyleSheet.create({
   textButton: {
     color: "#483100"
   },
+
+  modalView: {
+    flex: 1,
+    justifyContent: "center",
+    marginHorizontal: 10,
+  },
+  modalContent: {
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    borderColor: "#000000",
+    margin: 20,
+    padding: 20
+  },
+  textInput: {
+    borderWidth: 1,
+    paddingHorizontal: 5,
+    marginTop: 5,
+    borderRadius: 5
+  },
+  modalButtonGroup: {
+    flexDirection: "row",
+    marginTop: 10,
+  },
+  modalButtonGroupButton: {
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: 0,
+  },
+  modalButton: {
+    padding: 10,
+    margin: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#000000",
+  },
+  modalButtonCancel: {
+    backgroundColor: "#FFFFFF",
+  },
+  modalButtonValidate: {
+    backgroundColor: "#000000",
+  },
+  modalButtonPressed: {
+    backgroundColor: "#BFBFBF",
+  },
+  modalButtonText: {
+    color: "#000000",
+    textAlign: "center",
+    fontSize: 16,
+  },
+  modalButtonTextValidate: {
+    color: "#FFFFFF",
+  }
 });
 
 export default TableItem;
