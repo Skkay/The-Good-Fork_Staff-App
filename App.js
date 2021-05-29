@@ -6,6 +6,7 @@ import LoginScreen from "./src/screens/LoginScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import Toast from 'react-native-toast-message'
 
 import { AuthContext } from "./src/components/AuthContext";
 import CustomDrawer from './src/components/CustomDrawer';
@@ -85,6 +86,7 @@ const App = () => {
             </Stack.Screen>
           </Stack.Navigator>
         )}
+        <Toast ref={(ref) => Toast.setRef(ref)} />
       </NavigationContainer>
     </AuthContext.Provider>
   );
