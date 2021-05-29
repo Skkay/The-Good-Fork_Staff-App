@@ -20,6 +20,7 @@ const WaiterMainStackNavigator = ({ navigation }) => {
       <Stack.Screen 
         name="WaiterHome" 
         component={WaiterHomeScreen} 
+        initialParams={{ toastType: "", toastExtra: {} }} 
         options={{ 
           title: "Serveur: Accueil",
           headerLeft: () => (

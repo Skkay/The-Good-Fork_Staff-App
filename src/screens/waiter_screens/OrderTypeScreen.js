@@ -51,7 +51,7 @@ const OrderTypeScreen = ({ route, navigation }) => {
     postOrder(token, cartData, extraInfo, false, date)
       .then((res) => {
         console.log("Take-out order successfully placed", res);
-        // navigation.navigate('Home', {toastType: "order_success_takeout", toastExtra: res.data});
+        navigation.navigate('WaiterHome', {toastType: "order_success_takeout", toastExtra: res.data});
       })
       .catch((err) => {
         console.log("Error during take-out order process", err)
@@ -65,7 +65,7 @@ const OrderTypeScreen = ({ route, navigation }) => {
     postOrder(token, cartData, extraInfo, true, null)
     .then((res) => {
       console.log("Eat-in order successfully placed", res);
-      // navigation.navigate('Home', {toastType: "order_success_eatin", toastExtra: res.data});
+      navigation.navigate('WaiterHome', {toastType: "order_success_eatin", toastExtra: res.data});
     })
     .catch((err) => {
       console.log("Error during eat-in order process", err)
