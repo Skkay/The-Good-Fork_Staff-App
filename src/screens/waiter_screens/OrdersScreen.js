@@ -6,7 +6,7 @@ import ExpiredSession from '../../components/alert/ExpiredSession';
 import UnexpectedError from '../../components/alert/UnexpectedError';
 import fetchToken from '../../components/fetch/FetchToken';
 import fetchTokenValidity from '../../components/fetch/FetchTokenValidity';
-import fetchOrders from '../../components/fetch/FetchOrders';
+import { fetchOrders } from '../../components/fetch/FetchOrders';
 import OrderItem from '../../components/orders/OrderItem';
 import updateOrderStatus from '../../components/fetch/UpdateOrderStatus';
 

@@ -9,4 +9,13 @@ const fetchOrders = (token, statusId, eatIn) => {
     .catch((err) => console.log(err.message));
 }
 
-export default fetchOrders;
+const fetchAllOrders = (token, statusId) => {
+  const options = getFetchingOption(token);
+
+  return fetch(`http://192.168.1.18/3proj_api/public/api/orders?status.id=${statusId}`, options)
+    .then((res) => res.json())
+    .then((json) => json)
+    .catch((err) => console.log(err.message));
+}
+
+export { fetchOrders, fetchAllOrders };
