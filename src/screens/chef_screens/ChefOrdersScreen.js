@@ -1,5 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import { SafeAreaView, Text, ActivityIndicator, FlatList } from "react-native";
+
+import { useFocusEffect } from '@react-navigation/native';
 
 import { AuthContext } from '../../components/AuthContext';
 import ExpiredSession from '../../components/alert/ExpiredSession';
@@ -44,12 +46,16 @@ const ChefOrdersScreen = () => {
         ExpiredSession(signOut);
       }
     })
-    if (!isValidToken) return;
+  }, [token]);
 
-    fetchAllOrders(token, 3)
-      .then((res) => {setOrders(res); console.log(res)})
-      .finally(() => setLoadingOrders(false));
-  }, [token, isValidToken, refreshKey]);
+  useFocusEffect(
+    useCallback(() => {
+      setLoadingOrders(true);
+      fetchAllOrders(token, 3)
+        .then((res) => setOrders(res))
+        .finally(() => setLoadingOrders(false));
+    }, [isValidToken, refreshKey])
+  );
 
   if (isLoadingOrders) {
     return (<ActivityIndicator size="large" color="#000000" />);
