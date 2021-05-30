@@ -7,7 +7,7 @@ import Icon from './components/svg/Icon';
 import WaiterHomeScreen from './screens/waiter_screens/WaiterHomeScreen';
 import OrdersScreen from './screens/waiter_screens/OrdersScreen';
 import BarmanHomeScreen from "./screens/barman_screens/BarmanHomeScreen";
-import ChefHomeScreen from "./screens/chef_screens/ChefHomeScreen";
+import ChefHomeScreen from "./screens/chef_screens/ChefOrdersScreen";
 import DefaultScreen from "./screens/DefaultScreen";
 import PlaceOrderScreen from "./screens/waiter_screens/PlaceOrderScreen";
 import OrderTypeScreen from "./screens/waiter_screens/OrderTypeScreen";
@@ -60,12 +60,12 @@ const BarmanMainStackNavigator = ({ navigation }) => {
 
 const ChefMainStackNavigator = ({ navigation }) => {
   return (
-    <Stack.Navigator initialRouteName="ChefHome">
+    <Stack.Navigator initialRouteName="ChefOrders">
       <Stack.Screen 
-        name="ChefHome" 
+        name="ChefOrders" 
         component={ChefHomeScreen} 
         options={{ 
-          title: "Cuisinier: Accueil",
+          title: "Cuisinier: Commandes",
           headerLeft: () => (
             <Pressable style={styles.drawerIcon} onPress={() => navigation.openDrawer()}>
               <Icon name="Bars" height="28" width="28" />
