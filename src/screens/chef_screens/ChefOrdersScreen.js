@@ -61,13 +61,22 @@ const ChefOrdersScreen = () => {
     return (<ActivityIndicator size="large" color="#000000" />);
   }
 
+  const renderItem = ({ item }) => {
+    if (item.orderedFood.length !== 0) {
+      return (
+        <ChefOrderItem order={item} handleUpdateStatusOrder={handleUpdateStatusOrder} />
+      );
+    }
+    return null;
+  }
+
   return (
     <SafeAreaView>
       {orders.length < 1 ? (<Text style={styles.textNoOrder}>Aucune commande</Text>) : 
       (
         <FlatList
           data={orders}
-          renderItem={({ item }) => <ChefOrderItem order={item} handleUpdateStatusOrder={handleUpdateStatusOrder} />}
+          renderItem={renderItem}
           keyExtractor={item => item.id.toString()} />
       )}
     </SafeAreaView>
