@@ -8,7 +8,7 @@ import fetchToken from '../../components/fetch/FetchToken';
 import fetchTokenValidity from '../../components/fetch/FetchTokenValidity';
 import { fetchOrders } from '../../components/fetch/FetchOrders';
 import OrderItem from '../../components/orders/OrderItem';
-import updateOrderStatus from '../../components/fetch/UpdateOrderStatus';
+import { updateOrderStatus } from '../../components/fetch/UpdateOrderStatus';
 
 const OrdersScreen = () => {
   const { signOut } = useContext(AuthContext);

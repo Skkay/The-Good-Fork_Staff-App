@@ -10,7 +10,7 @@ import fetchToken from '../../components/fetch/FetchToken';
 import fetchTokenValidity from '../../components/fetch/FetchTokenValidity';
 import { fetchAllOrdersForChef } from '../../components/fetch/FetchOrders';
 import ChefOrderItem from '../../components/orders/ChefOrderItem';
-import updateOrderStatus from '../../components/fetch/UpdateOrderStatus';
+import { chefValidateOrder } from '../../components/fetch/UpdateOrderStatus';
 
 const ChefOrdersScreen = () => {
   const { signOut } = useContext(AuthContext);
@@ -21,7 +21,7 @@ const ChefOrdersScreen = () => {
   const [refreshKey, setRefreshKey] = useState(0);
 
   const handleUpdateStatusOrder = (orderId) => {
-    updateOrderStatus(token, orderId, 4)
+    chefValidateOrder(token, orderId)
       .then((res) => {
         console.log("Order status successfully updated", res);
         setRefreshKey(oldKey => oldKey + 1)

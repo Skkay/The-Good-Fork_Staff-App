@@ -10,7 +10,7 @@ import fetchToken from '../../components/fetch/FetchToken';
 import fetchTokenValidity from '../../components/fetch/FetchTokenValidity';
 import { fetchAllOrdersForBarman } from '../../components/fetch/FetchOrders';
 import BarmanOrderItem from '../../components/orders/BarmanOrderItem';
-import updateOrderStatus from '../../components/fetch/UpdateOrderStatus';
+import { barmanValidateOrder } from '../../components/fetch/UpdateOrderStatus';
 
 const BarmanOrdersScreen = () => {
   const { signOut } = useContext(AuthContext);
@@ -21,7 +21,7 @@ const BarmanOrdersScreen = () => {
   const [refreshKey, setRefreshKey] = useState(0);
 
   const handleUpdateStatusOrder = (orderId) => {
-    updateOrderStatus(token, orderId, 4)
+    barmanValidateOrder(token, orderId)
       .then((res) => {
         console.log("Order status successfully updated", res);
         setRefreshKey(oldKey => oldKey + 1)
