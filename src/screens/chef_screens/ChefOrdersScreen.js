@@ -8,7 +8,7 @@ import ExpiredSession from '../../components/alert/ExpiredSession';
 import UnexpectedError from '../../components/alert/UnexpectedError';
 import fetchToken from '../../components/fetch/FetchToken';
 import fetchTokenValidity from '../../components/fetch/FetchTokenValidity';
-import { fetchAllOrders } from '../../components/fetch/FetchOrders';
+import { fetchAllOrdersForChef } from '../../components/fetch/FetchOrders';
 import ChefOrderItem from '../../components/orders/ChefOrderItem';
 import updateOrderStatus from '../../components/fetch/UpdateOrderStatus';
 
@@ -51,7 +51,7 @@ const ChefOrdersScreen = () => {
   useFocusEffect(
     useCallback(() => {
       setLoadingOrders(true);
-      fetchAllOrders(token, 3)
+      fetchAllOrdersForChef(token)
         .then((res) => setOrders(res))
         .finally(() => setLoadingOrders(false));
     }, [isValidToken, refreshKey])

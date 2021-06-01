@@ -8,7 +8,7 @@ import ExpiredSession from '../../components/alert/ExpiredSession';
 import UnexpectedError from '../../components/alert/UnexpectedError';
 import fetchToken from '../../components/fetch/FetchToken';
 import fetchTokenValidity from '../../components/fetch/FetchTokenValidity';
-import { fetchAllOrders } from '../../components/fetch/FetchOrders';
+import { fetchAllOrdersForBarman } from '../../components/fetch/FetchOrders';
 import BarmanOrderItem from '../../components/orders/BarmanOrderItem';
 import updateOrderStatus from '../../components/fetch/UpdateOrderStatus';
 
@@ -51,7 +51,7 @@ const BarmanOrdersScreen = () => {
   useFocusEffect(
     useCallback(() => {
       setLoadingOrders(true);
-      fetchAllOrders(token, 3)
+      fetchAllOrdersForBarman(token)
         .then((res) => setOrders(res))
         .finally(() => setLoadingOrders(false));
     }, [isValidToken, refreshKey])

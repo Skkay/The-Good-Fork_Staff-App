@@ -18,4 +18,22 @@ const fetchAllOrders = (token, statusId) => {
     .catch((err) => console.log(err.message));
 }
 
-export { fetchOrders, fetchAllOrders };
+const fetchAllOrdersForChef = (token) => {
+  const options = getFetchingOption(token);
+
+  return fetch(`http://192.168.1.18/3proj_api/public/api/orders?status.id=3&chefHasValidated=false`, options)
+    .then((res) => res.json())
+    .then((json) => json)
+    .catch((err) => console.log(err.message));
+}
+
+const fetchAllOrdersForBarman = (token) => {
+  const options = getFetchingOption(token);
+
+  return fetch(`http://192.168.1.18/3proj_api/public/api/orders?status.id=3&barmanHasValidated=false`, options)
+    .then((res) => res.json())
+    .then((json) => json)
+    .catch((err) => console.log(err.message));
+}
+
+export { fetchOrders, fetchAllOrders, fetchAllOrdersForChef, fetchAllOrdersForBarman };
