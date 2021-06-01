@@ -1,13 +1,13 @@
 import axios from "axios";
 
-import getFetchingOption from './options';
+import { getFetchingOption, API_URL } from './options';
 
 const updateOrderStatus = (token, orderId, statusId) => {
   const options = getFetchingOption(token);
 
   return axios({
     method: "POST",
-    url: `http://192.168.1.18/3proj_api/public/api/orders/${orderId}/update_status/${statusId}`,
+    url: `${API_URL}/orders/${orderId}/update_status/${statusId}`,
     withCredentials: true,
     headers: {
       'accept': options.headers.accept,
@@ -21,7 +21,7 @@ const chefValidateOrder = (token, orderId) => {
 
   return axios({
     method: "POST",
-    url: `http://192.168.1.18/3proj_api/public/api/orders/${orderId}/chef_validate`,
+    url: `${API_URL}/orders/${orderId}/chef_validate`,
     withCredentials: true,
     headers: {
       'accept': options.headers.accept,
@@ -35,7 +35,7 @@ const barmanValidateOrder = (token, orderId) => {
 
   return axios({
     method: "POST",
-    url: `http://192.168.1.18/3proj_api/public/api/orders/${orderId}/barman_validate`,
+    url: `${API_URL}/orders/${orderId}/barman_validate`,
     withCredentials: true,
     headers: {
       'accept': options.headers.accept,
