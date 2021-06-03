@@ -46,6 +46,9 @@ const ChefOrderItem = ({ order, handleUpdateStatusOrder }) => {
             </View>
           )}
         </View>
+        <View style={styles.orderExtraInformations}>
+            <Text>{order.extraInformations}</Text>
+        </View>
         <View style={styles.buttonGroup}>
           <Pressable style={({ pressed }) => [styles.buttonGroupButton, styles.buttonValidate, pressed && styles.buttonPressed]} onPress={() => handleUpdateStatusOrder(order.id)}>
             <Text style={styles.buttonText}>Terminer</Text>
@@ -104,6 +107,16 @@ const styles = StyleSheet.create({
   orderContentLabel: {
     fontSize: 14,
     fontWeight: "bold",
+  },
+  orderExtraInformations: {
+    backgroundColor: "#E0E0E0",
+    paddingHorizontal: 5,
+    borderTopWidth: stylesVar.borderWidth,
+    borderLeftWidth: stylesVar.borderWidth,
+    borderRightWidth: stylesVar.borderWidth,
+    borderTopColor: stylesVar.borderColor,
+    borderLeftColor: stylesVar.borderColor,
+    borderRightColor: stylesVar.borderColor,
   },
 
   buttonGroup: {
