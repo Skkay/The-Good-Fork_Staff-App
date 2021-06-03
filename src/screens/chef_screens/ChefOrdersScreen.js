@@ -19,6 +19,7 @@ const ChefOrdersScreen = () => {
   const [isLoadingOrders, setLoadingOrders] = useState(true);
   const [orders, setOrders] = useState([]);
   const [refreshKey, setRefreshKey] = useState(0);
+  const [refreshing, setRefreshing] = useState(false);
 
   const handleUpdateStatusOrder = (orderId) => {
     chefValidateOrder(token, orderId)
@@ -53,8 +54,8 @@ const ChefOrdersScreen = () => {
       setLoadingOrders(true);
       fetchAllOrdersForChef(token)
         .then((res) => setOrders(res))
-        .finally(() => setLoadingOrders(false));
-    }, [isValidToken, refreshKey])
+        .finally(() => { setLoadingOrders(false); setRefreshing(false); });
+    }, [isValidToken, refreshKey, refreshing])
   );
 
   if (isLoadingOrders) {
@@ -77,7 +78,9 @@ const ChefOrdersScreen = () => {
         <FlatList
           data={orders}
           renderItem={renderItem}
-          keyExtractor={item => item.id.toString()} />
+          keyExtractor={item => item.id.toString()}
+          refreshing={refreshing}
+          onRefresh={() => setRefreshing(true)} />
       )}
     </SafeAreaView>
   );

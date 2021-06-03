@@ -20,6 +20,8 @@ const OrdersScreen = () => {
   const [takeOutOrders, setTakeOutOrders] = useState([]);
   const [selectedTab, setSelectedTab] = useState(0);
   const [refreshKey, setRefreshKey] = useState(0);
+  const [takeoutRefreshing, setTakeoutRefreshing] = useState(false);
+  const [eatinRefreshing, setEatinRefreshing] = useState(false);
 
   const handleValidateOrder = (orderId) => {
     updateOrderStatus(token, orderId, 3)
@@ -68,16 +70,23 @@ const OrdersScreen = () => {
         ExpiredSession(signOut);
       }
     })
+  }, [token, isValidToken]);
+
+  useEffect(() => {
     if (!isValidToken) return;
 
     fetchOrders(token, 2, false)
       .then((res) => setTakeOutOrders(res))
-      .finally(() => setLoadingTakeOutOrders(false));
+      .finally(() => { setLoadingTakeOutOrders(false); setTakeoutRefreshing(false); });
+  }, [isValidToken, refreshKey, takeoutRefreshing]);
 
+  useEffect(() => {
+    if (!isValidToken) return;
+    
     fetchOrders(token, 2, true)
       .then((res) => setEatInOrders(res))
-      .finally(() => setLoadingEatInOrders(false));
-  }, [token, isValidToken, refreshKey]);
+      .finally(() => { setLoadingEatInOrders(false); setEatinRefreshing(false); });
+  }, [isValidToken, refreshKey, eatinRefreshing]);
 
   if (isLoadingEatInOrders && isLoadingTakeOutOrders) {
     return (<ActivityIndicator size="large" color="#000000" />);
@@ -99,7 +108,9 @@ const OrdersScreen = () => {
           <FlatList
             data={eatInOrders}
             renderItem={({ item }) => <OrderItem order={item} handleValidateOrder={handleValidateOrder} handleCancelOrder={handleCancelOrder} />}
-            keyExtractor={item => item.id.toString()} />
+            keyExtractor={item => item.id.toString()}
+            refreshing={eatinRefreshing}
+            onRefresh={() => setEatinRefreshing(true)} />
         ))
 
       )}
@@ -109,7 +120,9 @@ const OrdersScreen = () => {
           <FlatList
             data={takeOutOrders}
             renderItem={({ item }) => <OrderItem order={item} handleValidateOrder={handleValidateOrder} handleCancelOrder={handleCancelOrder} />}
-            keyExtractor={item => item.id.toString()} />
+            keyExtractor={item => item.id.toString()}
+            refreshing={takeoutRefreshing}
+            onRefresh={() => setTakeoutRefreshing(true)} />
         ))
       )}
 

@@ -14,6 +14,7 @@ const ReservationScreen = ({ navigation }) => {
   const [isValidToken, setValidToken] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     fetchToken()
@@ -33,8 +34,8 @@ const ReservationScreen = ({ navigation }) => {
 
     fetchAvailableTables(token)
       .then((res) => setData(res))
-      .finally(() => setLoading(false));
-  }, [token, isValidToken]);
+      .finally(() => { setLoading(false); setRefreshing(false) });
+  }, [token, isValidToken, refreshing]);
 
   if (isLoading) {
     return (
@@ -48,7 +49,8 @@ const ReservationScreen = ({ navigation }) => {
         data={data}
         renderItem={({ item }) => <TableItem table={item} token={token} navigation={navigation} />}
         keyExtractor={item => item.date + item.service.id.toString() + item.table.id.toString()}
-      />
+        refreshing={refreshing}
+        onRefresh={() => setRefreshing(true)} />
     </SafeAreaView>
   );
 };
