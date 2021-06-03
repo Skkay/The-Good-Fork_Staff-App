@@ -93,7 +93,7 @@ const OrdersScreen = () => {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.buttonGroup}>
         <Pressable style={[styles.buttonGroupButton, styles.button, selectedTab === 0 && styles.buttonSelected]} onPress={() => setSelectedTab(0)}>
           <Text style={[styles.buttonText, selectedTab === 0 && styles.buttonTextSelected]}>Sur place</Text>
@@ -103,27 +103,26 @@ const OrdersScreen = () => {
         </Pressable>
       </View>
       {selectedTab === 0 && (
-        (eatInOrders.length < 1 ? (<Text style={styles.textNoOrder}>Aucune commande</Text>) : 
-        (
-          <FlatList
+        <>
+        {eatInOrders.length < 1 && <Text style={styles.textNoOrder}>Aucune commande</Text>}
+        <FlatList
             data={eatInOrders}
             renderItem={({ item }) => <OrderItem order={item} handleValidateOrder={handleValidateOrder} handleCancelOrder={handleCancelOrder} />}
             keyExtractor={item => item.id.toString()}
             refreshing={eatinRefreshing}
             onRefresh={() => setEatinRefreshing(true)} />
-        ))
-
+        </>
       )}
       {selectedTab === 1 && (
-        (takeOutOrders.length < 1 ? (<Text style={styles.textNoOrder}>Aucune commande</Text>) : 
-        (
-          <FlatList
-            data={takeOutOrders}
-            renderItem={({ item }) => <OrderItem order={item} handleValidateOrder={handleValidateOrder} handleCancelOrder={handleCancelOrder} />}
-            keyExtractor={item => item.id.toString()}
-            refreshing={takeoutRefreshing}
-            onRefresh={() => setTakeoutRefreshing(true)} />
-        ))
+        <>
+        {takeOutOrders.length < 1 && <Text style={styles.textNoOrder}>Aucune commande</Text>}
+        <FlatList
+          data={takeOutOrders}
+          renderItem={({ item }) => <OrderItem order={item} handleValidateOrder={handleValidateOrder} handleCancelOrder={handleCancelOrder} />}
+          keyExtractor={item => item.id.toString()}
+          refreshing={takeoutRefreshing}
+          onRefresh={() => setTakeoutRefreshing(true)} />
+        </>
       )}
 
     </SafeAreaView>

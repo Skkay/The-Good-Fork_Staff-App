@@ -72,16 +72,14 @@ const ChefOrdersScreen = () => {
   }
 
   return (
-    <SafeAreaView>
-      {orders.length < 1 ? (<Text style={styles.textNoOrder}>Aucune commande</Text>) : 
-      (
-        <FlatList
-          data={orders}
-          renderItem={renderItem}
-          keyExtractor={item => item.id.toString()}
-          refreshing={refreshing}
-          onRefresh={() => setRefreshing(true)} />
-      )}
+    <SafeAreaView style={{ flex: 1 }}>
+      {orders.length < 1 && <Text style={styles.textNoOrder}>Aucune commande</Text>}
+      <FlatList
+        data={orders}
+        renderItem={renderItem}
+        keyExtractor={item => item.id.toString()}
+        refreshing={refreshing}
+        onRefresh={() => setRefreshing(true)} />
     </SafeAreaView>
   );
 };
