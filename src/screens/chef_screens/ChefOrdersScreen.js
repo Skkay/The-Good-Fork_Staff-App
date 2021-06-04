@@ -63,7 +63,7 @@ const ChefOrdersScreen = () => {
   }
 
   const renderItem = ({ item }) => {
-    if (item.orderedFood.length !== 0) {
+    if (item.orderedFood.length > 0 || item.orderedMenu.length > 0) {
       return (
         <ChefOrderItem order={item} handleUpdateStatusOrder={handleUpdateStatusOrder} />
       );

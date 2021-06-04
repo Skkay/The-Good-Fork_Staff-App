@@ -63,7 +63,7 @@ const BarmanOrdersScreen = () => {
   }
 
   const renderItem = ({ item }) => {
-    if (item.orderedDrink.length !== 0) {
+    if (item.orderedDrink.length > 0 || item.orderedMenu.length > 0) {
       return (
         <BarmanOrderItem order={item} handleUpdateStatusOrder={handleUpdateStatusOrder} />
       );
