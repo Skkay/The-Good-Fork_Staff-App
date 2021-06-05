@@ -45,7 +45,7 @@ const ReservationScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      {orders.length < 1 && <Text style={styles.textNoOrder}>Aucune réservation disponible</Text>}
+      {data.length < 1 && <Text style={styles.textNoOrder}>Aucune réservation disponible</Text>}
       <FlatList 
         data={data}
         renderItem={({ item }) => <TableItem table={item} token={token} navigation={navigation} />}
