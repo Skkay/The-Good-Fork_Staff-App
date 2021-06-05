@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { SafeAreaView, Text, StyleSheet, Pressable } from "react-native";
+import { SafeAreaView, Text, StyleSheet, Pressable, View } from "react-native";
 
 import Toast from 'react-native-toast-message'
 
@@ -31,24 +31,52 @@ const WaiterHomeScreen = ({ route, navigation }) => {
 
   return (
     <SafeAreaView>
-      <Text>Waiter home screen</Text>
-      <Pressable style={styles.button} onPress={() => navigation.navigate('Orders')}>
-        <Text>Orders</Text>
+      <Pressable style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]} onPress={() => navigation.navigate('Orders')}>
+        <Text style={styles.buttonText}>Commandes en attente</Text>
       </Pressable>
-      <Pressable style={styles.button} onPress={() => navigation.navigate('PlaceOrder')}>
-        <Text>Place order</Text>
-      </Pressable>
-      <Pressable style={styles.button} onPress={() => navigation.navigate('Reservation')}>
-        <Text>Reservation</Text>
-      </Pressable>
+      <View style={styles.buttonGroup}>
+        <Pressable style={({ pressed }) => [styles.buttonGroupButton, styles.button, pressed && styles.buttonPressed]} onPress={() => navigation.navigate('PlaceOrder')}>
+          <Text style={styles.buttonText}>Commander</Text>
+        </Pressable>
+        <Pressable style={({ pressed }) => [styles.buttonGroupButton, styles.button, pressed && styles.buttonPressed]} onPress={() => navigation.navigate('Reservation')}>
+          <Text style={styles.buttonText}>Réserver</Text>
+        </Pressable>
+      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  buttonGroup: {
+    flexDirection: "row",
+  },
+  buttonGroupButton: {
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: 0,
+  },
   button: {
-    backgroundColor: "#53A7D7",
-    margin: 10
+    backgroundColor: "#FFFFFF",
+    padding: 10,
+    margin: 10,
+    borderRadius: 10,
+
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  buttonPressed: {
+    backgroundColor: "#BFBFBF",
+  },
+  buttonText: {
+    color: "#000000",
+    textAlign: "center",
+    fontSize: 16,
   },
 });
 
