@@ -10,7 +10,7 @@ import { fetchOrders } from '../../components/fetch/FetchOrders';
 import OrderItem from '../../components/orders/OrderItem';
 import { updateOrderStatus } from '../../components/fetch/UpdateOrderStatus';
 
-const OrdersScreen = () => {
+const PendingOrdersScreen = () => {
   const { signOut } = useContext(AuthContext);
   const [token, setToken] = useState(null);
   const [isValidToken, setValidToken] = useState(false);
@@ -164,4 +164,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default OrdersScreen;
+export default PendingOrdersScreen;

@@ -5,7 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Icon from './components/svg/Icon';
 import WaiterHomeScreen from './screens/waiter_screens/WaiterHomeScreen';
-import OrdersScreen from './screens/waiter_screens/OrdersScreen';
+import PendingOrdersScreen from './screens/waiter_screens/PendingOrdersScreen';
 import BarmanOrdersScreen from "./screens/barman_screens/BarmanOrdersScreen";
 import ChefHomeScreen from "./screens/chef_screens/ChefOrdersScreen";
 import DefaultScreen from "./screens/DefaultScreen";
@@ -31,7 +31,7 @@ const WaiterMainStackNavigator = ({ navigation }) => {
           ) 
         }} 
       />
-      <Stack.Screen name="Orders" component={OrdersScreen} options={{ title: "Commandes en attente"}} />
+      <Stack.Screen name="Orders" component={PendingOrdersScreen} options={{ title: "Commandes en attente"}} />
       <Stack.Screen name="PlaceOrder" component={PlaceOrderScreen} options={{ title: "Passer une commande"}} />
       <Stack.Screen name="OrderType" component={OrderTypeScreen} options={{ title: "Passer une commande"}} />
       <Stack.Screen name="Reservation" component={ReservationScreen} options={{ title: "Réserver une table"}} />
