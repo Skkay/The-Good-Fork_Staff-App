@@ -40,7 +40,7 @@ const PendingOrdersScreen = () => {
       "Confirmer l'annulation ?",
       `Vous êtes sur le point d'annuler une commande, confirmer ?`,
       [
-        { text: "Annuler", onPress: () => console.log("Order not canceled") }, 
+        { text: "Non", onPress: () => console.log("Order not canceled") }, 
         { text: "Oui", onPress: () => {
           updateOrderStatus(token, orderId, 1)
             .then((res) => {
