@@ -34,6 +34,9 @@ const WaiterHomeScreen = ({ route, navigation }) => {
       <Pressable style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]} onPress={() => navigation.navigate('Orders')}>
         <Text style={styles.buttonText}>Commandes en attente</Text>
       </Pressable>
+      <Pressable style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]} onPress={() => navigation.navigate('FinishedOrders')}>
+        <Text style={styles.buttonText}>Commandes terminée</Text>
+      </Pressable>
       <View style={styles.buttonGroup}>
         <Pressable style={({ pressed }) => [styles.buttonGroupButton, styles.button, pressed && styles.buttonPressed]} onPress={() => navigation.navigate('PlaceOrder')}>
           <Text style={styles.buttonText}>Commander</Text>

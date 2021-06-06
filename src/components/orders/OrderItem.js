@@ -65,7 +65,7 @@ const OrderItem = ({ order, handleValidateOrder, handleCancelOrder }) => {
             <Text style={styles.buttonText}>Supprimer</Text>
           </Pressable>
           <Pressable style={({ pressed }) => [styles.buttonGroupButton, styles.buttonValidate, pressed && styles.buttonPressed]} onPress={() => handleValidateOrder(order.id)}>
-            <Text style={styles.buttonText}>Valider</Text>
+            <Text style={styles.buttonText}>{order.status.id === 2 && "Valider"}{order.status.id === 4 && "Rendre"}</Text>
           </Pressable>
         </View>
       </View>

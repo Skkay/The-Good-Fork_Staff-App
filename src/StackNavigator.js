@@ -12,6 +12,7 @@ import DefaultScreen from "./screens/DefaultScreen";
 import PlaceOrderScreen from "./screens/waiter_screens/PlaceOrderScreen";
 import OrderTypeScreen from "./screens/waiter_screens/OrderTypeScreen";
 import ReservationScreen from "./screens/waiter_screens/ReservationScreen";
+import FinishedOrdersScreen from './screens/waiter_screens/FinishedOrdersScreen';
 
 const Stack = createStackNavigator();
 
@@ -35,6 +36,7 @@ const WaiterMainStackNavigator = ({ navigation }) => {
       <Stack.Screen name="PlaceOrder" component={PlaceOrderScreen} options={{ title: "Passer une commande"}} />
       <Stack.Screen name="OrderType" component={OrderTypeScreen} options={{ title: "Passer une commande"}} />
       <Stack.Screen name="Reservation" component={ReservationScreen} options={{ title: "Réserver une table"}} />
+      <Stack.Screen name="FinishedOrders" component={FinishedOrdersScreen} options={{ title: "Commandes terminée"}} />
     </Stack.Navigator>
   );
 }
