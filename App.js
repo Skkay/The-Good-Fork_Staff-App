@@ -70,9 +70,9 @@ const App = () => {
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         {isConnected ? (
-          <Drawer.Navigator drawerContent={props => (
-            <CustomDrawer props={props} signOut={signOut} />
-          )}>
+          <Drawer.Navigator 
+          drawerContent={props => ( <CustomDrawer props={props} signOut={signOut} /> )}
+          drawerContentOptions={{ activeTintColor: "#000000" }} >
             {roles.includes('ROLE_WAITER') && <Drawer.Screen name="Waiter" component={WaiterMainStackNavigator} options={{ title: "Serveur: Accueil"}} /> }
             {roles.includes('ROLE_BARMAN') && <Drawer.Screen name="Barman" component={BarmanMainStackNavigator} options={{ title: "Barman: Accueil"}} /> }
             {roles.includes('ROLE_CHEF') && <Drawer.Screen name="Chef" component={ChefMainStackNavigator} options={{ title: "Cuisinier: Accueil"}} /> }
