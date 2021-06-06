@@ -31,7 +31,7 @@ const WaiterMainStackNavigator = ({ navigation }) => {
           ) 
         }} 
       />
-      <Stack.Screen name="Orders" component={OrdersScreen} options={{ title: "Les commandes"}} />
+      <Stack.Screen name="Orders" component={OrdersScreen} options={{ title: "Commandes en attente"}} />
       <Stack.Screen name="PlaceOrder" component={PlaceOrderScreen} options={{ title: "Passer une commande"}} />
       <Stack.Screen name="OrderType" component={OrderTypeScreen} options={{ title: "Passer une commande"}} />
       <Stack.Screen name="Reservation" component={ReservationScreen} options={{ title: "Réserver une table"}} />
