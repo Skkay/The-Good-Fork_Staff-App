@@ -18,7 +18,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.cyphercloud.thegoodfork",
+      "bundleIdentifier": "com.cyphercloud.thegoodforkstaff",
       "buildNumber": "1.0.0"
     },
     "android": {
@@ -26,7 +26,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.cyphercloud.thegoodfork",
+      "package": "com.cyphercloud.thegoodforkstaff",
       "versionCode": 1
     },
     "web": {
