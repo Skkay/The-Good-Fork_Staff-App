@@ -26,8 +26,8 @@ const App = () => {
       AsyncStorage.removeItem("userTokenExp");
       AsyncStorage.removeItem("userId");
       AsyncStorage.removeItem("userRoles");
-      setRoles([]);
       setConnected(false);
+      setRoles([]);
     } catch (e) {
       console.log(e);
     }
