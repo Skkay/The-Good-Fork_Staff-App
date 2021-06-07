@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "TheGoodFork-Staff",
-    "slug": "TheGoodFork-Staff",
+    "name": "The Good Fork - Staff Version",
+    "slug": "the-good-fork-staff-version",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -17,13 +17,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.cyphercloud.thegoodfork",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.cyphercloud.thegoodfork",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
