@@ -73,9 +73,9 @@ const App = () => {
           <Drawer.Navigator 
           drawerContent={props => ( <CustomDrawer props={props} signOut={signOut} /> )}
           drawerContentOptions={{ activeTintColor: "#000000" }} >
-            {roles.includes('ROLE_WAITER') && <Drawer.Screen name="Waiter" component={WaiterMainStackNavigator} options={{ title: "Serveur: Accueil"}} /> }
-            {roles.includes('ROLE_BARMAN') && <Drawer.Screen name="Barman" component={BarmanMainStackNavigator} options={{ title: "Barman: Accueil"}} /> }
-            {roles.includes('ROLE_CHEF') && <Drawer.Screen name="Chef" component={ChefMainStackNavigator} options={{ title: "Cuisinier: Accueil"}} /> }
+            {(roles.includes('ROLE_WAITER') || roles.includes('ROLE_ADMIN')) && <Drawer.Screen name="Waiter" component={WaiterMainStackNavigator} options={{ title: "Serveur: Accueil"}} /> }
+            {(roles.includes('ROLE_BARMAN') || roles.includes('ROLE_ADMIN')) && <Drawer.Screen name="Barman" component={BarmanMainStackNavigator} options={{ title: "Barman: Accueil"}} /> }
+            {(roles.includes('ROLE_CHEF') || roles.includes('ROLE_ADMIN')) && <Drawer.Screen name="Chef" component={ChefMainStackNavigator} options={{ title: "Cuisinier: Accueil"}} /> }
 
             {(roles.includes('ROLE_USER') && roles.length <= 1) && <Drawer.Screen name="default" component={DefaultStackNavigator} /> }
           </Drawer.Navigator>
