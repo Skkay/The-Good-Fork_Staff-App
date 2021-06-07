@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
-import { SafeAreaView, Text, ActivityIndicator, FlatList } from "react-native";
+import { SafeAreaView, Text, ActivityIndicator, FlatList, StyleSheet } from "react-native";
 
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -83,5 +83,13 @@ const ChefOrdersScreen = () => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  textNoOrder: {
+    textAlign: "center",
+    color: "#6B6B6B",
+    fontStyle: "italic",
+  },
+});
 
 export default ChefOrdersScreen;
