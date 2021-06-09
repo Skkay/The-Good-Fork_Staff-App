@@ -32,10 +32,10 @@ const WaiterHomeScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView>
       <Pressable style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]} onPress={() => navigation.navigate('Orders')}>
-        <Text style={styles.buttonText}>Commandes en attente</Text>
+        <Text style={styles.buttonText}>Commandes en attentes</Text>
       </Pressable>
       <Pressable style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]} onPress={() => navigation.navigate('FinishedOrders')}>
-        <Text style={styles.buttonText}>Commandes terminée</Text>
+        <Text style={styles.buttonText}>Commandes terminées</Text>
       </Pressable>
       <View style={styles.buttonGroup}>
         <Pressable style={({ pressed }) => [styles.buttonGroupButton, styles.button, pressed && styles.buttonPressed]} onPress={() => navigation.navigate('PlaceOrder')}>

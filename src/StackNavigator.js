@@ -32,11 +32,11 @@ const WaiterMainStackNavigator = ({ navigation }) => {
           ) 
         }} 
       />
-      <Stack.Screen name="Orders" component={PendingOrdersScreen} options={{ title: "Commandes en attente"}} />
+      <Stack.Screen name="Orders" component={PendingOrdersScreen} options={{ title: "Commandes en attentes"}} />
       <Stack.Screen name="PlaceOrder" component={PlaceOrderScreen} options={{ title: "Passer une commande"}} />
       <Stack.Screen name="OrderType" component={OrderTypeScreen} options={{ title: "Passer une commande"}} />
       <Stack.Screen name="Reservation" component={ReservationScreen} options={{ title: "Réserver une table"}} />
-      <Stack.Screen name="FinishedOrders" component={FinishedOrdersScreen} options={{ title: "Commandes terminée"}} />
+      <Stack.Screen name="FinishedOrders" component={FinishedOrdersScreen} options={{ title: "Commandes terminées"}} />
     </Stack.Navigator>
   );
 }
